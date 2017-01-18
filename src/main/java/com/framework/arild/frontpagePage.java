@@ -44,6 +44,18 @@ public class frontpagePage {
     @FindBy(id = "flight-departing")
     WebElement departingDate;
 
+    @FindAll(@FindBy(xpath = ".//*[@id='flight-departing-wrapper']//button[contains(@class,'datepicker-cal-date')][not(contains(@class,'disabled'))]"))
+    List<WebElement> departingDatePicker;
+
+    @FindBy(id = "flight-returning")
+    WebElement returnDate;
+
+    @FindAll(@FindBy(xpath = ".//*[@id='flight-returning-wrapper']//button[contains(@class,'datepicker-cal-date')][not(contains(@class,'disabled'))]"))
+    List<WebElement> returnDatePicker;
+
+    @FindBy(id = "search-button")
+    WebElement searchButton;
+
 
     public void clickHomeTab(){
         tabHome.click();
@@ -89,11 +101,19 @@ public class frontpagePage {
     }
 
     public void pickDepartureDate(){
-        driver.findElement(By.xpath(".//span[contains(text(),'Departing')]//span[@class='visuallyhidden']"));
-        departingDate.sendKeys("02/12/2017");
+        departingDate.sendKeys(" ");
+        departingDatePicker.get(0).click();
+
     }
 
     public void pickReturnDate(){
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        returnDate.sendKeys("01/26/2017");
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        returnDatePicker.get(6).click();
+    }
 
+    public void clickSearch(){
+        searchButton.click();
     }
 }
