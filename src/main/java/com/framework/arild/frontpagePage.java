@@ -56,6 +56,14 @@ public class frontpagePage {
     @FindBy(id = "search-button")
     WebElement searchButton;
 
+    @FindBy(id="tab-cruise-tab")
+    WebElement cruiseTab;
+
+
+    public void clickCruiseTab(){
+        cruiseTab.click();
+    }
+
 
     public void clickHomeTab(){
         tabHome.click();
