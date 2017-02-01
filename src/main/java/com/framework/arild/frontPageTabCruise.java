@@ -22,7 +22,6 @@ public class frontPageTabCruise {
         PageFactory.initElements(driver,this);
     }
 
-
     @FindBy(id="cruise-destination")
      WebElement cruiseDestination;
 

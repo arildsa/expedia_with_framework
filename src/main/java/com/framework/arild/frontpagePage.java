@@ -59,6 +59,11 @@ public class frontpagePage {
     @FindBy(id="tab-cruise-tab")
     WebElement cruiseTab;
 
+    @FindBy(id="tab-activity-tab")
+    WebElement thingsToDo;
+
+
+
 
     public void clickCruiseTab(){
         cruiseTab.click();
@@ -110,7 +115,7 @@ public class frontpagePage {
 
     public void pickDepartureDate(){
         departingDate.sendKeys(" ");
-        departingDatePicker.get(0).click();
+        departingDatePicker.get(3).click();
 
     }
 
@@ -124,4 +129,12 @@ public class frontpagePage {
     public void clickSearch(){
         searchButton.click();
     }
+
+    public void clickThingsToDo(){
+        WebDriverWait wait = new WebDriverWait(driver,10);
+            wait.until(ExpectedConditions.elementToBeClickable(thingsToDo));
+        thingsToDo.click();
+    }
+
+
 }

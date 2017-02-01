@@ -1,5 +1,7 @@
 package com.tests.arild;
 
+import com.framework.arild.activityTab;
+import com.framework.arild.frontPageTabCruise;
 import com.framework.arild.frontpagePage;
 import com.framework.arild.searchResultsFlights;
 import org.junit.Assert;
@@ -9,15 +11,19 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+
 /**
  * Created by Arild on 1/18/2017.
  */
 public class frontpageTests {
 
-    WebDriver driver;
-    String baseUrl;
-    frontpagePage frontPage;
-    searchResultsFlights searchResults;
+    private WebDriver driver;
+    private String baseUrl;
+    private frontpagePage frontPage;
+    private searchResultsFlights searchResults;
+    private frontPageTabCruise cruiseTab;
+    private activityTab activity;
+
 
 
     @BeforeEach
@@ -26,15 +32,17 @@ public class frontpageTests {
         driver = new FirefoxDriver();
         baseUrl = "http://www.expedia.com";
         driver.navigate().to(baseUrl);
-
         frontPage = new frontpagePage(driver);
         searchResults = new searchResultsFlights(driver);
+        cruiseTab = new frontPageTabCruise(driver);
+        activity = new activityTab(driver);
+
 
     }
 
     @AfterEach
     public void afterClass(){
-//        driver.quit();
+//       driver.quit();
     }
 
     @Test
@@ -48,5 +56,21 @@ public class frontpageTests {
 
         Assert.assertEquals(searchResults.getSearchResultHeaderText(),"Select your departure to Honolulu");
 
+    }
+
+    @Test
+    public void cruiseTab(){
+        frontPage.clickCruiseTab();
+        cruiseTab.setCruiseDestination();
+        cruiseTab.selectDepartureMonth();
+        cruiseTab.clickSearch();
+
+    }
+
+    @Test
+    public void thingsToDo(){
+        frontPage.clickThingsToDo();
+        activity.setActivityDestination();
+        activity.clickSearch();
     }
 }
