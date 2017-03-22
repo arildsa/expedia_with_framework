@@ -19,10 +19,10 @@ public class activityTab {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id = "activity-destination")
+    @FindBy(id = "activity-destination-hp-activity")
     WebElement activityDestination;
 
-    @FindBy(id = "search-button")
+    @FindBy(xpath = ".//*[@id='gcw-activities-form-hp-activity']/button")
     WebElement searchButton;
 
 

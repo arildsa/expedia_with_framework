@@ -22,16 +22,25 @@ public class frontPageTabCruise {
         PageFactory.initElements(driver,this);
     }
 
-    @FindBy(id="cruise-destination")
+    @FindBy(id="cruise-destination-cruiselp")
      WebElement cruiseDestination;
 
-    @FindBy(id="cruise-departure-month")
+    @FindBy(id="cruise-departure-month-hp-cruise")
     WebElement departureMonth;
 
-    @FindBy(id="search-button")
+    @FindBy(xpath = ".//*[@id='gcw-cruises-form-hp-cruise']/button")
     WebElement searchButton;
 
+    public void clickDestination(){
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.elementToBeClickable(cruiseDestination));
+        cruiseDestination.click();
+    }
+
     public void setCruiseDestination(){
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.elementToBeClickable(cruiseDestination));
+
         Select cruiseSelectionDropDown = new Select(cruiseDestination);
         cruiseSelectionDropDown.selectByValue(cruiseDestinationEnum.BERMUDA.cruise());
     }

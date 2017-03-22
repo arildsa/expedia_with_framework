@@ -1,15 +1,11 @@
 package com.tests.arild;
 
-import com.framework.arild.activityTab;
-import com.framework.arild.frontPageTabCruise;
-import com.framework.arild.frontpagePage;
-import com.framework.arild.searchResultsFlights;
-import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.framework.arild.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 
 /**
@@ -20,57 +16,74 @@ public class frontpageTests {
     private WebDriver driver;
     private String baseUrl;
     private frontpagePage frontPage;
-    private searchResultsFlights searchResults;
-    private frontPageTabCruise cruiseTab;
-    private activityTab activity;
 
-
-
-    @BeforeEach
+    @BeforeClass
     public void beforeClass(){
         System.setProperty("webdriver.gecko.driver","C:\\geckodriver\\geckodriver.exe");
         driver = new FirefoxDriver();
         baseUrl = "http://www.expedia.com";
         driver.navigate().to(baseUrl);
         frontPage = new frontpagePage(driver);
-        searchResults = new searchResultsFlights(driver);
-        cruiseTab = new frontPageTabCruise(driver);
-        activity = new activityTab(driver);
-
-
     }
 
-    @AfterEach
+    @AfterClass
     public void afterClass(){
-//       driver.quit();
+       driver.quit();
     }
 
     @Test
-    public void searchForFlights(){
-        frontPage.clickHomeTab();
-        frontPage.clickSearchForFlightsTab();
-        frontPage.enterDepartureCityOrAirport("DENVER");
-        frontPage.enterArrivalCityOrAirport("HONOLULU");
-        frontPage.pickDepartureDate();
-        frontPage.clickSearch();
-
-        Assert.assertEquals(searchResults.getSearchResultHeaderText(),"Select your departure to Honolulu");
-
+    public void testTabHome() {
+        frontPage.clickHome();
     }
 
     @Test
-    public void cruiseTab(){
-        frontPage.clickCruiseTab();
-        cruiseTab.setCruiseDestination();
-        cruiseTab.selectDepartureMonth();
-        cruiseTab.clickSearch();
-
+    public void testTabBundleDeals() {
+        frontPage.clickTabBundleDeals();
     }
 
     @Test
-    public void thingsToDo(){
-        frontPage.clickThingsToDo();
-        activity.setActivityDestination();
-        activity.clickSearch();
+    public void testTabHotels() {
+        frontPage.clickTabHotels();
     }
+
+    @Test
+    public void testTabCars() {
+        frontPage.clickTabCars();
+    }
+
+    @Test
+    public void testTabFlights() {
+        frontPage.clickTabFlights();
+    }
+
+    @Test
+    public void testTabCruises() {
+        frontPage.clickTabCruises();
+    }
+
+    @Test
+    public void testTabThingsToDo() {
+        frontPage.clickTabThingsToDo();
+    }
+
+    @Test
+    public void testTabVacationRentals() {
+        frontPage.clickTabVacationRentals();
+    }
+
+    @Test
+    public void testTabDeals() {
+        frontPage.clickTabDeals();
+    }
+
+    @Test
+    public void testTabRewards() {
+        frontPage.clickTabRewards();
+    }
+
+    @Test
+    public void testTabMobile() {
+        frontPage.clickTabMobile();
+    }
+
 }

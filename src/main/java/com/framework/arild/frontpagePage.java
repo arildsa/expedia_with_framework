@@ -1,16 +1,9 @@
 package com.framework.arild;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -19,121 +12,128 @@ import java.util.concurrent.TimeUnit;
 public class frontpagePage {
 
     WebDriver driver;
+    private customCommands util;
+
 
     public frontpagePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
+        util = new customCommands(driver);
     }
+
 
     @FindBy(id = "primary-header-home")
     WebElement tabHome;
 
-    @FindBy(id = "tab-flight-tab")
-    WebElement searchForFlights;
+    @FindBy(id = "primary-header-package")
+    WebElement tabBundleDeals;
 
-    @FindBy(id = "flight-origin")
-    WebElement departureCityOrAiport;
+    @FindBy(id = "primary-header-hotel")
+    WebElement tabHotels;
 
-    @FindBy(id = "flight-destination")
-    WebElement arrivalCityOrAiport;
+    @FindBy ( id = "primary-header-car")
+    WebElement tabCars;
 
-    //Autocomplete for the City or Aiport field
-    @FindAll(@FindBy(xpath = ".//li[@class='results-item']//*[@class='main-suggestion']//b") )
-    List<WebElement> autocompleteCityAirport;
+    @FindBy ( id = "primary-header-flight")
+    WebElement tabFlights;
 
-    @FindBy(id = "flight-departing")
-    WebElement departingDate;
+    @FindBy ( id = "primary-header-cruise")
+    WebElement tabCruises;
 
-    @FindAll(@FindBy(xpath = ".//*[@id='flight-departing-wrapper']//button[contains(@class,'datepicker-cal-date')][not(contains(@class,'disabled'))]"))
-    List<WebElement> departingDatePicker;
+    @FindBy ( id = "primary-header-activity")
+    WebElement tabThingsToDo;
 
-    @FindBy(id = "flight-returning")
-    WebElement returnDate;
+    @FindBy ( id = "primary-header-vacationRental")
+    WebElement tabVacationRentals;
 
-    @FindAll(@FindBy(xpath = ".//*[@id='flight-returning-wrapper']//button[contains(@class,'datepicker-cal-date')][not(contains(@class,'disabled'))]"))
-    List<WebElement> returnDatePicker;
+    @FindBy ( id = "primary-header-deals")
+    WebElement tabDeals;
 
-    @FindBy(id = "search-button")
-    WebElement searchButton;
+    @FindBy ( id = "primary-header-rewards")
+    WebElement tabRewards;
 
-    @FindBy(id="tab-cruise-tab")
-    WebElement cruiseTab;
+    @FindBy ( id = "primary-header-mobile")
+    WebElement tabMobile;
 
-    @FindBy(id="tab-activity-tab")
-    WebElement thingsToDo;
+    @FindBy (xpath = ".//*[contains(text(),'Search Vacation Packages')]")
+    WebElement bundleDealsHeader;
+
+    @FindBy (xpath = ".//*[contains(text(),'Search Hotels')]")
+    WebElement hotelHeader;
+
+    @FindBy (xpath = ".//*[contains(text(),'Search Rental Car Deals')]")
+    WebElement rentalCarHeader;
+
+    @FindBy (xpath = ".//*[contains(text(),'Search Flights')]")
+    WebElement flightsHeader;
+
+    @FindBy (xpath = ".//*[contains(text(),'Search Cruises')]")
+    WebElement cruisesHeader;
+
+    @FindBy (xpath = ".//*[contains(text(),'Search Things To Do')]")
+    WebElement thingsToDoHeader;
+
+    @FindBy (xpath = ".//*[contains(text(),'Search Vacation Rentals')]")
+    WebElement vacationRentalsHeader;
+
+    @FindBy (xpath = ".//*[contains(text(),'Todays\'s Travel Deals')]")
+    WebElement dealsHeader;
 
 
 
 
-    public void clickCruiseTab(){
-        cruiseTab.click();
+
+    public void clickHome(){
+        util.utilClickElement(tabHome);
     }
 
-
-    public void clickHomeTab(){
-        tabHome.click();
-    }
-
-    public void clickSearchForFlightsTab(){
-        try{
-            searchForFlights.click();
-        }
-        catch (Exception e){
-            driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-            searchForFlights.click();
-        }
-    }
-
-    public void airportPicker(){
-        WebDriverWait wait = new WebDriverWait(driver,5);
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@class='results']"))));
-        autocompleteCityAirport.get(0).click();
-    }
-
-    public void airportPicker(int airportSelection){
-        WebDriverWait wait = new WebDriverWait(driver,5);
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@class='results']"))));
-        autocompleteCityAirport.get(airportSelection).click();
-    }
-
-
-
-    public void enterDepartureCityOrAirport(String departureCityAirport){
-        driver.findElement(By.xpath(".//*[@id='flight-origin-label']//span[@class='visuallyhidden']")).click();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        departureCityOrAiport.sendKeys(departureCityAirport);
-        airportPicker();
-    }
-
-    public void enterArrivalCityOrAirport(String arrivalCityAirport) {
-        driver.findElement(By.xpath(".//*[@id='flight-destination-label']//span[@class='visuallyhidden']")).click();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        arrivalCityOrAiport.sendKeys(arrivalCityAirport);
-        airportPicker();
+    public void clickTabBundleDeals(){
+        util.utilClickElement(tabBundleDeals);
+        util.waitUntilElementIsVisible(bundleDealsHeader);
 
     }
 
-    public void pickDepartureDate(){
-        departingDate.sendKeys(" ");
-        departingDatePicker.get(3).click();
-
+    public void clickTabHotels(){
+        util.utilClickElement(tabHotels);
+        util.waitUntilElementIsVisible(hotelHeader);
     }
 
-    public void pickReturnDate(){
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-        returnDate.sendKeys("01/26/2017");
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-        returnDatePicker.get(6).click();
+    public void clickTabCars(){
+        util.utilClickElement(tabCars);
+        util.waitUntilElementIsVisible(rentalCarHeader);
     }
 
-    public void clickSearch(){
-        searchButton.click();
+    public void clickTabFlights(){
+        util.utilClickElement(tabFlights);
+        util.waitUntilElementIsVisible(flightsHeader);
     }
 
-    public void clickThingsToDo(){
-        WebDriverWait wait = new WebDriverWait(driver,10);
-            wait.until(ExpectedConditions.elementToBeClickable(thingsToDo));
-        thingsToDo.click();
+    public void clickTabCruises(){
+        util.utilClickElement(tabCruises);
+        util.waitUntilElementIsVisible(cruisesHeader);
+    }
+
+    public void clickTabThingsToDo(){
+        util.utilClickElement(tabThingsToDo);
+        util.waitUntilElementIsVisible(thingsToDoHeader);
+    }
+
+    public void clickTabVacationRentals(){
+        util.utilClickElement(tabVacationRentals);
+        util.waitUntilElementIsVisible(vacationRentalsHeader);
+    }
+
+    public void clickTabDeals(){
+        util.utilClickElement(tabDeals);
+        util.waitUntilElementIsVisible(dealsHeader);
+    }
+
+    public void clickTabRewards(){
+        util.utilClickElement(tabRewards);
+    }
+
+    public void clickTabMobile(){
+        util.utilClickElement(tabMobile);
     }
 
 
