@@ -16,6 +16,9 @@ public class frontpageTests {
     private WebDriver driver;
     private String baseUrl;
     private frontpagePage frontPage;
+    private signInPage signInPage;
+
+
 
     @BeforeClass
     public void beforeClass(){
@@ -24,16 +27,35 @@ public class frontpageTests {
         baseUrl = "http://www.expedia.com";
         driver.navigate().to(baseUrl);
         frontPage = new frontpagePage(driver);
+        frontPage.closeAccountMenu();
+
     }
+
 
     @AfterClass
     public void afterClass(){
        driver.quit();
     }
 
+//    @Test
+//    public void signIn(){
+//        frontPage.accountSignIn();
+//        signInPage.SignIn();
+//    }
+
     @Test
     public void testTabHome() {
         frontPage.clickHome();
+    }
+
+    @Test
+    public void testTabDeals() {
+        frontPage.clickTabDeals();
+    }
+
+    @Test
+    public void testTabARewards() {
+        frontPage.clickTabRewards();
     }
 
     @Test
@@ -71,15 +93,7 @@ public class frontpageTests {
         frontPage.clickTabVacationRentals();
     }
 
-    @Test
-    public void testTabDeals() {
-        frontPage.clickTabDeals();
-    }
 
-    @Test
-    public void testTabRewards() {
-        frontPage.clickTabRewards();
-    }
 
     @Test
     public void testTabMobile() {

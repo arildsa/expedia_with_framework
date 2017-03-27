@@ -76,8 +76,20 @@ public class frontpagePage {
     @FindBy (xpath = ".//*[contains(text(),'Search Vacation Rentals')]")
     WebElement vacationRentalsHeader;
 
-    @FindBy (xpath = ".//*[contains(text(),'Todays\'s Travel Deals')]")
+    @FindBy (xpath = ".//*[contains(text(),'s Travel Deals')]")
     WebElement dealsHeader;
+
+    @FindBy (xpath = ".//a[contains(text(),'Benefits at a glance')]")
+    WebElement benefitsAtAGlance;
+
+    @FindBy (xpath = ".//*[contains(text(),'Why use the app?')]")
+    WebElement whyUseTheApp;
+
+    @FindBy (id = "header-account-menu")
+    WebElement accountMenu;
+
+    @FindBy (id = "account-signin")
+    WebElement accountSignIn;
 
 
 
@@ -101,6 +113,11 @@ public class frontpagePage {
     public void clickTabCars(){
         util.utilClickElement(tabCars);
         util.waitUntilElementIsVisible(rentalCarHeader);
+    }
+
+    public void clickTabRewards(){
+        util.utilClickElement(tabRewards);
+        util.waitUntilBrowserURLContains("howitworks");
     }
 
     public void clickTabFlights(){
@@ -128,12 +145,28 @@ public class frontpagePage {
         util.waitUntilElementIsVisible(dealsHeader);
     }
 
-    public void clickTabRewards(){
-        util.utilClickElement(tabRewards);
-    }
+
 
     public void clickTabMobile(){
         util.utilClickElement(tabMobile);
+        util.waitUntilElementIsVisible(whyUseTheApp);
+    }
+
+    public void accountSignIn(){
+        if(accountSignIn.isDisplayed())
+        {
+            accountSignIn.click();
+        }
+        else {
+            accountMenu.click();
+            accountSignIn.click();
+        }
+    }
+
+    public void closeAccountMenu(){
+        if( accountSignIn.isDisplayed()){
+            accountMenu.click();
+        }
     }
 
 

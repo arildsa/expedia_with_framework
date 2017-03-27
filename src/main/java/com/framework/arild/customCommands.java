@@ -27,7 +27,14 @@ public class customCommands {
 
     public void waitUntilElementIsVisible(WebElement element){
         WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        wait.until(ExpectedConditions.visibilityOf(element));
         System.out.println("Waited for " + element.getText());
     }
+
+    public void waitUntilBrowserURLContains(String urlPart){
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        wait.until(ExpectedConditions.urlContains(urlPart));
+
+    }
+
 }
